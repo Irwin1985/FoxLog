@@ -48,7 +48,7 @@ DEFINE CLASS FoxLogTests as FxuTestCase OF FxuTestCase.prg
 && ======================================================================== &&
 	Function TestLogInfo
 		This.TestOpen()
-		This.oLogger.LogInfo("Testing the info method...")
+		This.oLogger.LogInfo("Abecedario: {1},{2},{3},{4},{5},{6},{7},{8},{9},{10}", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
 	EndFunc
 && ======================================================================== &&
 && Function TestLogDebug

@@ -251,7 +251,7 @@ Define Class iLogger As Custom
     Function Destroy As Void
         This.oFoxString = .Null.
         Try
-        	Clear Class FoxStringClass
+        	Clear Class StringClass
         Catch
         EndTry
         Try
@@ -432,8 +432,30 @@ Define Class iLogger As Custom
 && ======================================================================== &&
     Hidden Function FormatLogMessage As Void
         With This
-            .cFormattedMsg = .GetLogText(.cLogType, .oFoxString.Format(.cLogMsg))
+            .cFormattedMsg = .GetLogText(.cLogType, .GetStringFormat())
         EndWith
+    EndFunc
+&& ======================================================================== &&
+&& Hidden Function GetStringFormat
+&& ======================================================================== &&
+    Hidden Function GetStringFormat As String
+        Local lcFormattedText As String
+        lcFormattedText = ""
+        With This
+            lcFormattedText = .oFoxString.Format(;
+            .cLogMsg, ;
+            .vParam1, ;
+            .vParam2, ;
+            .vParam3, ;
+            .vParam4, ;
+            .vParam5, ;
+            .vParam6, ;
+            .vParam7, ;
+            .vParam8, ;
+            .vParam9, ;
+            .vParam10)
+        EndWith
+        Return lcFormattedText
     EndFunc
 && ======================================================================== &&
 && Hidden Function GetLogText
@@ -552,7 +574,9 @@ Define Class LogAppender As iLogger
 && Function WriteLog
 && ======================================================================== &&
     Function WriteLog As Void
-        Strtofile(This.cFormattedMsg, This.LogFile, .T.)
+        If !Empty(This.LogFile)
+            Strtofile(This.cFormattedMsg, This.LogFile, .T.)
+        Endif
     EndFunc
 EndDefine
 && ======================================================================== &&
